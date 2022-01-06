@@ -31,8 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COLS 1
 
 /* Keyboard Matrix Assignments */
-#define MATRIX_ROW_PINS { F0 }
-#define MATRIX_COL_PINS { F1 }
+#define MATRIX_ROW_PINS { B5 }
+#define MATRIX_COL_PINS { B6 }
 #define UNUSED_PINS
 
 /* COL2ROW, ROW2COL*/
@@ -42,12 +42,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCE 5
 
 /* RGB light config */
-#define RGB_DI_PIN B6
+#define RGB_DI_PIN D3
 #define RGBLED_NUM 4
 #define RGBLIGHT_VAL_STEP 17
 #define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_EFFECT_BREATHE_CENTER 2.0
-#define RGBLIGHT_EFFECT_BREATHE_MAX 255
+//#define RGBLIGHT_EFFECT_BREATHE_CENTER 2.0
+//#define RGBLIGHT_EFFECT_BREATHE_MAX 255
 
 /* long tapping config */
 #define TAPPING_TERM 500

@@ -25,7 +25,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void keyboard_post_init_user(void) {
     rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
-    rgblight_sethsv_noeeprom(0,0,128);
+    rgblight_sethsv_noeeprom(0,255,0);
+    //rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_RGB_TEST);
 }
 
