@@ -44,10 +44,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MATRIX_COL_PINS { D0, D4, C6, D7, E6, B4, B5}
 //#define UNUSED_PINS
 
-#define MATRIX_ROW_PINS { B1, B3, B2, B6, B5}
-#define MATRIX_COL_PINS { D1, D0, D4, C6, D7, E6, B4}
-#define MATRIX_ROW_PINS_RIGHT { B1, B3, B2, B6, B5}
-#define MATRIX_COL_PINS_RIGHT { B4, E6, D7, C6, D4, D0, D1}
+// row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
+// #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
+#define MATRIX_ROW_PINS { F6, F7, B1, B3, B2} // top to bottom 
+
+// column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from inside to outside 
+// #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
+#define MATRIX_COL_PINS { B6, B5, B4, E6, D7, C6, D4} // outside to inside 
+
+// row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
+// #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
+#define MATRIX_ROW_PINS_RIGHT { F6, F7, B1, B3, B2} // top to bottom
+// column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from outside to inside 
+// #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
+#define MATRIX_COL_PINS_RIGHT { B6, B5, B4, E6, D7, C6, D4} // inside (left) to outside (right)
 #define UNUSED_PINS
 
 #define MASTER_LEFT
@@ -150,8 +160,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_FUNCTION
 
 /* Bootmagic Lite key configuration */
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 0
+//#define BOOTMAGIC_LITE_ROW 0
+//#define BOOTMAGIC_LITE_COLUMN 0
 
 
 
@@ -170,5 +180,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LEADER_TIMEOUT 400
 #define LEADER_PER_KEY_TIMING
 
-#define BOOTMAGIC_LITE_ROW_LEFT 0
-#define BOOTMAGIC_LITE_COLUMN_LEFT 0
+//#define BOOTMAGIC_LITE_ROW_LEFT 0
+//#define BOOTMAGIC_LITE_COLUMN_LEFT 0

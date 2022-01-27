@@ -27,24 +27,29 @@
  * represents the switch matrix.
  */
 
+// row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
+// #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
+// column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from inside to outside 
+// #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
+
  #define LAYOUT( \
- 	L000, L001, L002, L003, L004, L005, L006,  							R000, R001, R002, R003, R004, R005, R006, \
- 	L100, L101, L102, L103, L104, L105, L106, 							R100, R101, R102, R103, R104, R105, R106, \
- 	L200, L201, L202, L203, L204, L205, L206, 							R200, R201, R202, R203, R204, R205, R206, \
- 	L300, L301, L302, L303, L304, L305, L306, 							R300, R301, R302, R303, R304, R305, R306, \
-							L404, L405, L406, 							R400, R401, R402\
+ 	L000, L001, L002, L003, L004, L005, L006, 		R000, R001, R002, R003, R004, R005, R006, \
+ 	L100, L101, L102, L103, L104, L105, L106, 		R100, R101, R102, R103, R104, R105, R106, \
+ 	L200, L201, L202, L203, L204, L205, L206, 		R200, R201, R202, R203, R204, R205, R206, \
+ 	L300, L301, L302, L303, L304, L305, L306, 		R300, R301, R302, R303, R304, R305, R306, \
+							L404, L405, L406, 		R400, R401, R402\
  ) \
  { \
  	{ L000,  L001,  L002,  L003,  L004,  L005,  L006}, \
  	{ L100,  L101,  L102,  L103,  L104,  L105,  L106}, \
  	{ L200,  L201,  L202,  L203,  L204,  L205,  L206}, \
  	{ L300,  L301,  L302,  L303,  L304,  L305,  L306}, \
- 	{ KC_NO,  KC_NO,  KC_NO,  KC_NO,  L404,  L405,  L406}, \
+ 	{ KC_NO, KC_NO, KC_NO, KC_NO, L404,  L405,  L406}, \
 	{ R000,  R001,  R002,  R003,  R004,  R005,  R006}, \
  	{ R100,  R101,  R102,  R103,  R104,  R105,  R106}, \
  	{ R200,  R201,  R202,  R203,  R204,  R205,  R206}, \
  	{ R300,  R301,  R302,  R303,  R304,  R305,  R306}, \
- 	{ R400,  R401,  R402,  KC_NO,  KC_NO,  KC_NO,  KC_NO}, \
+ 	{ R400,  R401,  R402,  KC_NO, KC_NO, KC_NO, KC_NO}, \
  }
 
 /*
