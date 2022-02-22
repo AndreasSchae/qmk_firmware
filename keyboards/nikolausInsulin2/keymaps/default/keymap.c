@@ -77,6 +77,9 @@ enum custom_keycodes {
     CIRCUM,
     BACKTICK,
     MINMZE,
+    CSTRST, 
+    CSTSETRED, 
+    CSTSETBLUE, 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -120,15 +123,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // 
       }
       break;
-    /*
-    case LAYERCHANGE:
-        if (record->event.pressed) {
-            layer_on(4);
-        } else {
-            // when keycode QMKBEST is released
-        }
-        break;
-    */
+    case CSTRST:
+      if (record->event.pressed) {
+          reset_keyboard();
+      } else {
+          //
+      }
+      break;
+    case CSTSETRED:
+      if (record->event.pressed) {
+          rgb_matrix_set_color_all(255, 0, 0);
+      } else {
+          //
+      }
+      break;
+    case CSTSETBLUE:
+      if (record->event.pressed) {
+          rgb_matrix_set_color_all(0, 0, 255);
+      } else {
+          //
+      }
+      break;
     }
     return true;
 };
@@ -140,7 +155,7 @@ void matrix_scan_user(void) {
     leading = false;
     leader_end();
 
-
+    
     SEQ_TWO_KEYS(KC_S, KC_S) {
       // make windows screenshot
       SEND_STRING(SS_LWIN(SS_TAP(X_PSCREEN))); 
@@ -154,6 +169,7 @@ void matrix_scan_user(void) {
         SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_ESC))));
     }    
 
+    /*
     SEQ_FOUR_KEYS(KC_C, KC_A, KC_P, KC_S) {
       // toggle capslock
       SEND_STRING(SS_TAP(X_CAPS));
@@ -169,13 +185,14 @@ void matrix_scan_user(void) {
     SEQ_FOUR_KEYS(KC_D, KC_I, KC_C, KC_T) {
         // open windows dictation mode
         SEND_STRING(SS_LWIN(SS_TAP(X_H)));
-    }
+    } */
 
     // Neo system tray application toggle
     SEQ_THREE_KEYS(KC_N, KC_E, KC_O) {
       SEND_STRING(SS_LSFT(SS_TAP(X_PAUSE)) SS_DELAY(5) SS_TAP(X_LSFT));
     }
 
+    /*
     // windows window rearrangement
     // note how n is left arrow, r is down arrow, t is right arrow, g is up arrow
     // First group sends windowskey + direction
@@ -203,7 +220,7 @@ void matrix_scan_user(void) {
     }
     SEQ_THREE_KEYS(KC_W, KC_S, KC_R) {
       SEND_STRING(SS_LWIN(SS_LSFT(SS_TAP(X_DOWN))));
-    }
+    } */
 
 
 
@@ -222,6 +239,7 @@ void matrix_scan_user(void) {
     }
     
     // LAYER SWITCHING
+    /*
     SEQ_FOUR_KEYS(KC_A, KC_N, KC_K, KC_I) {
       // anki layer
       layer_on(4);
@@ -233,7 +251,17 @@ void matrix_scan_user(void) {
     SEQ_FOUR_KEYS(KC_G, KC_A, KC_M, KC_E) {
       // gaming layer
       layer_on(5);
+    } */
+    
+    // MACROS 
+    SEQ_ONE_KEY(KC_Q) {
+      // Q: A: 
+      SEND_STRING("Q"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     }
+    SEQ_TWO_KEYS(KC_Q, KC_R) {
+      // QR: A: 
+      SEND_STRING("QR"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
+    }    
 
     // KEYBOARD COMMANDS
     SEQ_FIVE_KEYS(KC_R, KC_E, KC_S, KC_E, KC_T) {
@@ -252,7 +280,25 @@ void matrix_scan_user(void) {
     }
   }
 } 
-        
+
+/*
+static uint16_t default_animation = RGB_MODE_BREATHE;
+static int default_speed = 50;
+*/
+void keyboard_post_init_user(void) {
+    //rgblight_enable_noeeprom();
+    //rgblight_sethsv_noeeprom(0,255,0);
+    //rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
+    //rgblight_mode_noeeprom(RGBLIGHT_MODE_RGB_TEST);
+    /*
+    rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
+    rgb_matrix_mode_noeeprom(default_animation);
+    rgb_matrix_set_speed_noeeprom(default_speed);
+    */
+    rgb_matrix_set_color_all(255, 0, 0);
+}
+
+
 
 // when adding combos change combocount in config.h
 
@@ -287,8 +333,8 @@ combo_t key_combos[COMBO_COUNT] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [0] = LAYOUT(
-    _______,  _______,              _______,                _______,          TO(6),              KC_LEAD,  _______,                                   _______,    KC_LEAD,   _______,    _______,        _______,            _______,    _______,
-    _______,  TD(tapdanceEscAltF4), KC_X,                   KC_V,             KC_L,               KC_C,     KC_W,                                      KC_K,       KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
+    _______,  RGB_TOG,              RGB_MODE_BREATHE,                CSTSETRED,          CSTSETBLUE,              KC_LEAD,  _______,                                   _______,    KC_LEAD,   TO(6),    _______,        _______,            _______,    _______,
+    CSTRST,  TD(tapdanceEscAltF4), KC_X,                   KC_V,             KC_L,               KC_C,     KC_W,                                      KC_K,       KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
     ALT_TAB,  KC_TAB,               KC_U,                   KC_I,             KC_A,               KC_E,     KC_O,                                      KC_S,       KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       KC_MS_WH_DOWN,    
     MINMZE,   KC_LCTRL,             MT(MOD_LGUI, DE_UDIA),  LALT_T(DE_ODIA),  DE_ADIA,            KC_P,     DE_Z,                                      KC_B,       KC_M,      KC_COMMA,   RALT_T(KC_DOT), MT(MOD_RGUI, KC_J), KC_RCTRL,   _______,    
                                                                 KC_BSPACE,    TD(tapdanceSpace),   KC_DOWN,                 TG(1), OSM(MOD_LSFT), OSL(2)
@@ -309,6 +355,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     DE_HASH,       DE_DLR,       DE_PIPE,     DE_TILD,      BACKTICK,                                   DE_PLUS,        DE_PERC,      DE_DQUO,     DE_QUOT,   DE_SCLN,    _______,    _______,    
                                                                             KC_DEL,    _______,    _______,                _______,    _______,   _______
 ), 
+
 // qwertz layer
 [3] = LAYOUT(
     TO(0),      _______,     KC_1,        KC_2,       KC_3,           KC_4,        KC_5,                                   KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       DE_SS,    _______,
@@ -325,7 +372,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     _______,     _______,    _______,        _______,    _______,                                _______,    _______,    _______,    _______,    _______,    _______,    _______,    
                                                                             _______,    _______,    _______,    _______,    _______,   _______
 ), 
-// gaming layer
+// gaming layer 
 [5] = LAYOUT(
     TO(0),      _______,     _______,     KC_1,        KC_2,       KC_3,           KC_4,        KC_5,                                   KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       DE_SS, 
     _______,    _______,     KC_TAB,      KC_Q,        KC_W,       KC_E,           KC_R,        KC_T,                                   DE_Z,       KC_U,       KC_I,       KC_O,       KC_P,       DE_UDIA, 
@@ -341,8 +388,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
                       KC_1,    KC_2,    KC_3,       KC_4,    KC_5,   KC_6
 ), 
-};
 
+};
 
 /* 
 [1] = LAYOUT(
@@ -523,3 +570,66 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [tapdanceHomeShiftHome] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, homeshifthome_finished, homeshifthome_reset), 
 };
 
+
+
+
+
+led_config_t g_led_config = { {
+  // Key Matrix to LED Index
+  // left 
+  {   NO_LED, 0, 1, 2, 3, 4, NO_LED,},
+  {   5, 6, 7, 8, 9, 10, 11,},
+  {   12, 13, 14, 15, 16, 17, 18,},
+  {   19, 20, 21, 22, 23, 24, 25,},
+  {   NO_LED, NO_LED, NO_LED, NO_LED, 26, 27, 28,},
+  // right 
+  {   NO_LED, 29, 30, 31, 32, 33,  NO_LED,},
+  {   34, 35, 36, 37, 38, 39, 40,},
+  {   41, 42, 43, 44, 45, 46, 47,},
+  {   48, 49, 50, 51, 52, 53, 54,},
+  {   55, 56, 57, NO_LED, NO_LED, NO_LED, NO_LED,},
+},
+ {
+  // LED Index to Physical Position
+  // horizontal: 224/(14-1) = 17,23
+  // vertical: 64/(5-1) = 16
+  // left 
+                { 16,  00 }, { 32,  00 }, { 48,  00 }, { 64,  00 }, { 80,  00 }, 
+  {  00,  16 }, { 16,  16 }, { 32,  16 }, { 48,  16 }, { 64,  16 }, { 80,  16 }, { 96,  16 },
+  {  00,  32 }, { 16,  32 }, { 32,  32 }, { 48,  32 }, { 64,  32 }, { 80,  32 }, { 96,  32 },
+  {  00,  48 }, { 16,  48 }, { 32,  48 }, { 48,  48 }, { 64,  48 }, { 80,  48 }, { 96,  48 },
+                                                       { 64,  64 }, { 80,  64 }, { 96,  64 }, 
+  // right 
+                { 128,  00 }, { 144,  00 }, { 160,  00 }, { 176,  00 }, { 192,  00 }, 
+  { 112,  16 }, { 128,  16 }, { 144,  16 }, { 160,  16 }, { 176,  16 }, { 192,  16 }, { 208,  16 },
+  { 112,  32 }, { 128,  32 }, { 144,  32 }, { 160,  32 }, { 176,  32 }, { 192,  32 }, { 208,  32 },
+  { 112,  48 }, { 128,  48 }, { 144,  48 }, { 160,  48 }, { 176,  48 }, { 192,  48 }, { 208,  48 },
+  { 112,  64 }, { 128,  64 }, { 144,  64 }, 
+}, {
+  // LED Index to Flag
+  // left 
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+  // right 
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+} };
+
+
+/*
+void suspend_power_down_kb(void) {
+    rgb_matrix_set_suspend_state(true);
+    suspend_power_down_user();
+}
+
+void suspend_wakeup_init_kb(void) {
+    rgb_matrix_set_suspend_state(false);
+    suspend_wakeup_init_user();
+}
+*/
+
+/*
+    KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
+    DE_E, TO(0),DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
+    KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
+    DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
+                      KC_1,    KC_2,    KC_3,       KC_4,    KC_5,   KC_6
+                      */
