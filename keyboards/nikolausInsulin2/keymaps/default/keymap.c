@@ -40,6 +40,7 @@ enum {
     tapdanceSpace, 
     //tapdanceTabAltTab, 
     tapdanceEscAltF4,
+    tapdanceMin1MinAll, 
     tapdanceEndShiftEnd,
     tapdanceHomeShiftHome, 
 };
@@ -164,10 +165,11 @@ void matrix_scan_user(void) {
         // windows snipping tool
         SEND_STRING(SS_LWIN(SS_LSFT(SS_TAP(X_S))));
     }
+    /*
     SEQ_FOUR_KEYS(KC_T, KC_A, KC_S, KC_K) {
         // windows task manager
         SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_ESC))));
-    }    
+    } */
 
     /*
     SEQ_FOUR_KEYS(KC_C, KC_A, KC_P, KC_S) {
@@ -187,10 +189,11 @@ void matrix_scan_user(void) {
         SEND_STRING(SS_LWIN(SS_TAP(X_H)));
     } */
 
+    /*
     // Neo system tray application toggle
     SEQ_THREE_KEYS(KC_N, KC_E, KC_O) {
       SEND_STRING(SS_LSFT(SS_TAP(X_PAUSE)) SS_DELAY(5) SS_TAP(X_LSFT));
-    }
+    } */
 
     /*
     // windows window rearrangement
@@ -295,7 +298,7 @@ void keyboard_post_init_user(void) {
     rgb_matrix_mode_noeeprom(default_animation);
     rgb_matrix_set_speed_noeeprom(default_speed);
     */
-    rgb_matrix_set_color_all(255, 0, 0);
+    //rgb_matrix_set_color_all(255, 0, 0);
 }
 
 
@@ -336,7 +339,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  RGB_TOG,              RGB_MODE_BREATHE,                CSTSETRED,          CSTSETBLUE,              KC_LEAD,  _______,                                   _______,    KC_LEAD,   TO(6),    _______,        _______,            _______,    _______,
     CSTRST,  TD(tapdanceEscAltF4), KC_X,                   KC_V,             KC_L,               KC_C,     KC_W,                                      KC_K,       KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
     ALT_TAB,  KC_TAB,               KC_U,                   KC_I,             KC_A,               KC_E,     KC_O,                                      KC_S,       KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       KC_MS_WH_DOWN,    
-    MINMZE,   KC_LCTRL,             MT(MOD_LGUI, DE_UDIA),  LALT_T(DE_ODIA),  DE_ADIA,            KC_P,     DE_Z,                                      KC_B,       KC_M,      KC_COMMA,   RALT_T(KC_DOT), MT(MOD_RGUI, KC_J), KC_RCTRL,   _______,    
+    TD(tapdanceMin1MinAll),   KC_LCTRL,             MT(MOD_LGUI, DE_UDIA),  LALT_T(DE_ODIA),  DE_ADIA,            KC_P,     DE_Z,                                      KC_B,       KC_M,      KC_COMMA,   RALT_T(KC_DOT), MT(MOD_RGUI, KC_J), KC_RCTRL,   _______,    
                                                                 KC_BSPACE,    TD(tapdanceSpace),   KC_DOWN,                 TG(1), OSM(MOD_LSFT), OSL(2)
   ), 
 // numpad and arrows layer
@@ -465,6 +468,10 @@ static td_tap_t escaltf4tap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
+static td_tap_t min1minalltap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
 static td_tap_t endshiftendtap_state = {
     .is_press_action = true,
     .state = TD_NONE
@@ -518,6 +525,28 @@ void escaltf4_reset(qk_tap_dance_state_t *state, void *user_data) {
     escaltf4tap_state.state = TD_NONE;
 } 
 
+// min1minAll Tapdance
+void min1minall_finished(qk_tap_dance_state_t *state, void *user_data) {
+    min1minalltap_state.state = cur_dance(state);
+    switch (min1minalltap_state.state) {
+        case TD_SINGLE_TAP: register_code(KC_LGUI); tap_code(KC_DOWN); unregister_code(KC_LGUI); break;
+        case TD_SINGLE_HOLD: register_code(KC_LGUI); tap_code(KC_M); unregister_code(KC_LGUI); break;
+        case TD_DOUBLE_TAP: register_code(KC_LGUI); tap_code(KC_DOWN); unregister_code(KC_LGUI); register_code(KC_LGUI); tap_code(KC_DOWN); unregister_code(KC_LGUI); break;
+        case TD_DOUBLE_HOLD: register_code(KC_LGUI); tap_code(KC_M); unregister_code(KC_LGUI); break;
+        default: ;
+    }
+}
+void min1minall_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (min1minalltap_state.state) {
+        case TD_SINGLE_TAP: unregister_code(KC_DOWN); break;
+        case TD_SINGLE_HOLD: unregister_code(KC_M); break;
+        case TD_DOUBLE_TAP: unregister_code(KC_DOWN); break;
+        case TD_DOUBLE_HOLD: unregister_code(KC_M); 
+        default: ;
+    }
+    min1minalltap_state.state = TD_NONE;
+} 
+
 // endShiftEnd Tapdance
 void endshiftend_finished(qk_tap_dance_state_t *state, void *user_data) {
     endshiftendtap_state.state = cur_dance(state);
@@ -566,6 +595,7 @@ void homeshifthome_reset(qk_tap_dance_state_t *state, void *user_data) {
 qk_tap_dance_action_t tap_dance_actions[] = {
     [tapdanceSpace] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, space_finished, space_reset),
     [tapdanceEscAltF4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escaltf4_finished, escaltf4_reset), 
+    [tapdanceMin1MinAll] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, min1minall_finished, min1minall_reset), 
     [tapdanceEndShiftEnd] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, endshiftend_finished, endshiftend_reset), 
     [tapdanceHomeShiftHome] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, homeshifthome_finished, homeshifthome_reset), 
 };
@@ -591,7 +621,7 @@ led_config_t g_led_config = { {
 },
  {
   // LED Index to Physical Position
-  // horizontal: 224/(14-1) = 17,23
+  // horizontal: 224/(14-1) = 17.23
   // vertical: 64/(5-1) = 16
   // left 
                 { 16,  00 }, { 32,  00 }, { 48,  00 }, { 64,  00 }, { 80,  00 }, 
