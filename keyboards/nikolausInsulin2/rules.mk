@@ -34,4 +34,4 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGB_MATRIX_ENABLE = no
 #RGB_MATRIX_DRIVER = WS2812
 
-#ENCODER_ENABLE = yes
+ENCODER_ENABLE = yes

@@ -41,6 +41,7 @@ enum {
     //tapdanceTabAltTab, 
     tapdanceEscAltF4,
     tapdanceMin1MinAll, 
+    tapdanceMaximizeFullscreen, 
     tapdanceEndShiftEnd,
     tapdanceHomeShiftHome, 
 };
@@ -341,8 +342,8 @@ combo_t key_combos[COMBO_COUNT] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [0] = LAYOUT(
-    _______,  RGB_TOG,              RGB_MODE_BREATHE,                CSTSETRED,          CSTSETBLUE,              KC_LEAD,  _______,                                   _______,    KC_LEAD,   TO(6),    _______,        _______,            _______,    _______,
-    CSTRST,  TD(tapdanceEscAltF4), KC_X,                   KC_V,             KC_L,               KC_C,     KC_W,                                      KC_K,       KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
+    _______,  RGB_TOG,              RGB_MODE_BREATHE,                CSTSETRED,          CSTRST,              KC_LEAD,  _______,                                   _______,    KC_LEAD,   TO(6),    _______,        _______,            _______,    _______,
+    TD(tapdanceMaximizeFullscreen),  TD(tapdanceEscAltF4), KC_X,                   KC_V,             KC_L,               KC_C,     KC_W,                                      KC_K,       KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
     ALT_TAB,  KC_TAB,               KC_U,                   KC_I,             KC_A,               KC_E,     KC_O,                                      KC_S,       KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       KC_MS_WH_DOWN,    
     TD(tapdanceMin1MinAll),   KC_LCTRL,             MT(MOD_LGUI, DE_UDIA),  LALT_T(DE_ODIA),  DE_ADIA,            KC_P,     DE_Z,                                      KC_B,       KC_M,      KC_COMMA,   RALT_T(KC_DOT), MT(MOD_RGUI, KC_J), KC_RCTRL,   _______,    
                                                                 KC_BSPACE,    TD(tapdanceSpace),   KC_DOWN,                 TG(1), OSM(MOD_LSFT), OSL(2)
@@ -410,7 +411,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 */
 
-/*
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { // First encoder 
         if (clockwise) {
@@ -429,7 +430,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return false;
 }
-*/
+
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -495,6 +496,10 @@ static td_tap_t escaltf4tap_state = {
     .state = TD_NONE
 };
 static td_tap_t min1minalltap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
+static td_tap_t maximizefullscreentap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
@@ -573,6 +578,28 @@ void min1minall_reset(qk_tap_dance_state_t *state, void *user_data) {
     min1minalltap_state.state = TD_NONE;
 } 
 
+// maximizeFullscreen Tapdance
+void  maximizefullscreen_finished(qk_tap_dance_state_t *state, void *user_data) {
+    maximizefullscreentap_state.state = cur_dance(state);
+    switch (maximizefullscreentap_state.state) {
+        case TD_SINGLE_TAP: register_code(KC_LGUI); tap_code(KC_UP); unregister_code(KC_LGUI); break;
+        case TD_SINGLE_HOLD: tap_code(KC_F11);  break;
+        case TD_DOUBLE_TAP: register_code(KC_LGUI); tap_code(KC_UP); unregister_code(KC_LGUI); register_code(KC_LGUI); tap_code(KC_UP); unregister_code(KC_LGUI); break;
+        case TD_DOUBLE_HOLD: tap_code(KC_F11);  break;
+        default: ;
+    }
+}
+void maximizefullscreen_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (maximizefullscreentap_state.state) {
+        case TD_SINGLE_TAP: unregister_code(KC_UP); break;
+        case TD_SINGLE_HOLD: unregister_code(KC_F11); break;
+        case TD_DOUBLE_TAP: unregister_code(KC_UP); break;
+        case TD_DOUBLE_HOLD: unregister_code(KC_F11); 
+        default: ;
+    }
+    maximizefullscreentap_state.state = TD_NONE;
+} 
+
 // endShiftEnd Tapdance
 void endshiftend_finished(qk_tap_dance_state_t *state, void *user_data) {
     endshiftendtap_state.state = cur_dance(state);
@@ -622,6 +649,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [tapdanceSpace] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, space_finished, space_reset),
     [tapdanceEscAltF4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escaltf4_finished, escaltf4_reset), 
     [tapdanceMin1MinAll] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, min1minall_finished, min1minall_reset), 
+    [tapdanceMaximizeFullscreen] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, maximizefullscreen_finished, maximizefullscreen_reset), 
     [tapdanceEndShiftEnd] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, endshiftend_finished, endshiftend_reset), 
     [tapdanceHomeShiftHome] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, homeshifthome_finished, homeshifthome_reset), 
 };
