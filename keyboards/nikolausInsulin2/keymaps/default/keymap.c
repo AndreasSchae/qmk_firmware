@@ -265,6 +265,10 @@ void matrix_scan_user(void) {
       // QR: A: 
       SEND_STRING("QR"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     }    
+    SEQ_TWO_KEYS(KC_E, KC_G) {
+      // English: German:  
+      SEND_STRING("English"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"German"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
+    } 
 
     // KEYBOARD COMMANDS
     SEQ_FIVE_KEYS(KC_R, KC_E, KC_S, KC_E, KC_T) {
@@ -384,13 +388,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             KC_MS_BTN1,    _______,    KC_MS_BTN2,    _______,    _______,   _______
 ), 
 // testing layer
+/*
 [6] = LAYOUT(
     KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
     DE_E, TO(0),DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
     KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
     DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
                       KC_1,    KC_2,    KC_3,       KC_4,    KC_5,   KC_6
-), 
+), */
 
 };
 
