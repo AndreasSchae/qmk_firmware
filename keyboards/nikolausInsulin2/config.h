@@ -90,13 +90,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define RGBLIGHT_EFFECT_BREATHE_MAX 255
 
 
+#ifdef RGB_MATRIX_ENABLE
 // The number of LEDs connected
 #define DRIVER_LED_TOTAL 58
 #define RGBLIGHT_SPLIT
 #define RGB_MATRIX_SPLIT { 29, 29 }
 
 
-#ifdef RGB_MATRIX_ENABLE
 // #  define RGB_DISABLE_TIMEOUT 300000 // number of milliseconds to wait until disabling effects
 // #  define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when suspended
 #  define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
@@ -233,3 +233,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define BOOTMAGIC_LITE_ROW_LEFT 0
 //#define BOOTMAGIC_LITE_COLUMN_LEFT 0
+
+/*
+#define ENCODERS_PAD_A { D0, F5 }
+#define ENCODERS_PAD_B { D1, F4 }
+#define ENCODER_RESOLUTIONS {4, 4}
+*/
+/*
+#define ENCODERS_PAD_A_RIGHT {  }
+#define ENCODERS_PAD_B_RIGHT {  }
+#define ENCODER_RESOLUTIONS_RIGHT {  }
+*/
+

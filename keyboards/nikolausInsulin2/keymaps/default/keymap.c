@@ -133,14 +133,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case CSTSETRED:
       if (record->event.pressed) {
-          rgb_matrix_set_color_all(255, 0, 0);
+          //rgb_matrix_set_color_all(255, 0, 0);
       } else {
           //
       }
       break;
     case CSTSETBLUE:
       if (record->event.pressed) {
-          rgb_matrix_set_color_all(0, 0, 255);
+          //rgb_matrix_set_color_all(0, 0, 255);
       } else {
           //
       }
@@ -228,6 +228,7 @@ void matrix_scan_user(void) {
 
 
     // BROWSER COMMANDS
+    /*
     SEQ_TWO_KEYS(KC_T, KC_L) {
       // tab left
       SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
@@ -239,7 +240,7 @@ void matrix_scan_user(void) {
     SEQ_FOUR_KEYS(KC_B, KC_O, KC_O, KC_K) {
       // bookmark 
       SEND_STRING(SS_LCTL("d"));
-    }
+    } */
     
     // LAYER SWITCHING
     /*
@@ -380,13 +381,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             _______,    _______,    _______,    _______,    _______,   _______
 ), 
 // gaming layer 
+/*
 [5] = LAYOUT(
     TO(0),      _______,     _______,     KC_1,        KC_2,       KC_3,           KC_4,        KC_5,                                   KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       DE_SS, 
     _______,    _______,     KC_TAB,      KC_Q,        KC_W,       KC_E,           KC_R,        KC_T,                                   DE_Z,       KC_U,       KC_I,       KC_O,       KC_P,       DE_UDIA, 
     _______,    _______,     KC_CAPS,     KC_A,        KC_S,       KC_D,           KC_F,        KC_G,                                   KC_H,       KC_J,       KC_K,       KC_L,       KC_ENT,     DE_ADIA, 
     _______,    _______,     KC_LSFT,     DE_Y,        KC_X,       KC_C,           KC_V,        KC_B,                                   KC_N,       KC_M,       KC_COMM,    KC_DOT,     DE_MINS,    _______, 
                                                                             KC_MS_BTN1,    _______,    KC_MS_BTN2,    _______,    _______,   _______
-), 
+), */
 // testing layer
 /*
 [6] = LAYOUT(
@@ -408,7 +410,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 */
 
-
+/*
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == 0) { // First encoder 
+        if (clockwise) {
+            tap_code_delay(KC_VOLU, 10);
+        } else {
+            tap_code_delay(KC_VOLD, 10);
+        }
+    } else if (index == 1) { // Second encoder 
+        if (clockwise) {
+            // tab left
+            SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
+        } else {
+            // tab right
+            SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
+        }
+    }
+    return false;
+}
+*/
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -608,7 +629,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 
 
-
+/*
 led_config_t g_led_config = { {
   // Key Matrix to LED Index
   // left 
@@ -647,7 +668,7 @@ led_config_t g_led_config = { {
   // right 
   4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
 } };
-
+*/
 
 /*
 void suspend_power_down_kb(void) {
