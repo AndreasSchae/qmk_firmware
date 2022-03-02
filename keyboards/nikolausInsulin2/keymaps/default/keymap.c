@@ -258,7 +258,7 @@ void matrix_scan_user(void) {
       layer_on(5);
     } */
     
-    // MACROS 
+    // MACROS FOR OBSIDIAN & ANKI 
     SEQ_ONE_KEY(KC_Q) {
       // Q: A: 
       SEND_STRING("Q"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
@@ -270,6 +270,10 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_E, KC_G) {
       // English: German:  
       SEND_STRING("English"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"German"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
+    } 
+    SEQ_FIVE_KEYS(KC_A, KC_L, KC_I, KC_A, KC_S) {
+      // --- aliases: [] --- 
+      SEND_STRING(""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_ENTER)"aliases"SS_LSFT(SS_TAP(X_DOT))" "SS_ALGR(SS_TAP(X_8))SS_ALGR(SS_TAP(X_9))SS_TAP(X_ENTER)""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     } 
 
     // KEYBOARD COMMANDS
