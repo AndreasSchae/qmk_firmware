@@ -415,21 +415,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 */
 
-
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { // First encoder 
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, 10);
-        } else {
-            tap_code_delay(KC_VOLD, 10);
+    if (get_highest_layer(layer_state|default_layer_state) > 0) {
+        if (index == 0) {
+            if (clockwise) {
+                tap_code(KC_WH_D);
+            } else {
+                tap_code(KC_WH_U);
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
+            } else {
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
+            }
         }
-    } else if (index == 1) { // Second encoder 
-        if (clockwise) {
-            // tab left
-            SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
-        } else {
-            // tab right
-            SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
+    } else {  /* Layer 0 */
+        if (index == 0) {
+            if (clockwise) {
+                tap_code(KC_PGDN);
+            } else {
+                tap_code(KC_PGUP);
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_WH_D);
+            } else {
+                tap_code(KC_WH_U);
+            }
         }
     }
     return false;
