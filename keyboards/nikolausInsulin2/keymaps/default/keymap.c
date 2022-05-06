@@ -39,9 +39,9 @@ typedef struct {
 enum {
     tapdanceSpace, 
     //tapdanceTabAltTab, 
-    tapdanceEscAltF4,
-    tapdanceMin1MinAll, 
-    tapdanceMaximizeFullscreen, 
+    tapdanceEscAltF4, // sends ESC on press and Alt+F4 on hold 
+    tapdanceMin1MinAll, // sends windows+down (make windows smaller/minimize) on press and windows+m (minimize all windows) on hold
+    tapdanceMaximizeFullscreen, // sends windows+down (make windows bigger/maximize) on press and F11 (go fullscreen) on hold 
     tapdanceEndShiftEnd,
     tapdanceHomeShiftHome, 
 };
@@ -354,10 +354,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ), 
 // numpad and arrows layer
 [1] = LAYOUT(
-    TO(0),      _______,     _______,      _______,       _______,  _______,    _______,                                    _______,                  _______,    _______,    _______,       _______,                 _______,     _______,
-    _______,    _______,     KC_COMMA,     KC_7,          KC_8,     KC_9,       _______,                                    _______,                  C(KC_LEFT), KC_UP,      C(KC_RIGHT),   _______,                 _______,     _______,    
-    _______,    _______,     KC_DOT,       KC_4,          KC_5,     KC_6,       _______,                                    TD(tapdanceHomeShiftHome), KC_LEFT,   KC_DOWN,    KC_RIGHT,      TD(tapdanceEndShiftEnd), _______,     _______,    
-    _______,    _______,     KC_0,         KC_1,          KC_2,     KC_3,       _______,                                    _______,                  _______,    _______,    _______,       _______,                 _______,     _______,    
+    TO(0),      _______,     _______,           _______,       _______,  _______,    _______,                                    _______,                  _______,    _______,    _______,       _______,                 _______,     _______,
+    _______,    _______,     KC_COMMA,          KC_7,          KC_8,     KC_9,       _______,                                    _______,                  C(KC_LEFT), KC_UP,      C(KC_RIGHT),   _______,                 _______,     _______,    
+    _______,    _______,     KC_DOT,            KC_4,          KC_5,     KC_6,       _______,                                    TD(tapdanceHomeShiftHome), KC_LEFT,   KC_DOWN,    KC_RIGHT,      TD(tapdanceEndShiftEnd), _______,     _______,    
+    _______,    _______,     MT(MOD_LGUI, KC_0),LALT_T(KC_1),  KC_2,     KC_3,       _______,                                    _______,                  _______,    _______,    _______,       _______,                 _______,     _______,    
                                                                 _______,       _______,    _______,                _______,    _______,   _______
 ), 
 // special signs layer
