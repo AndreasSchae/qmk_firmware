@@ -44,25 +44,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MATRIX_COL_PINS { D0, D4, C6, D7, E6, B4, B5}
 //#define UNUSED_PINS
 
+
 // row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
 // #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
 #define MATRIX_ROW_PINS \
-    { F4, F5, F6, F7, B1, B3 }  // top to bottom
+    { B3, B1, F7, F6, F5, F4 }  // top to bottom
 
 // column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from inside to outside
 // #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
 #define MATRIX_COL_PINS \
-    { B2, B6, B5, B4, E6, D7 }  // outside to inside
+    { B6, B5, B4, E6, D7, B2 }  // outside to inside
 
 // row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
 // #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
 #define MATRIX_ROW_PINS_RIGHT \
-    { F4, F5, F6, F7, B1, B3 }  // top to bottom
+    { B3, B1, F7, F6, F5, F4 }  // top to bottom
 // column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from outside to inside
 // #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
 #define MATRIX_COL_PINS_RIGHT \
-    { B2, B6, B5, B4, E6, D7 }  // inside (left) to outside (right)
+    { B6, B5, B4, E6, D7, B2 }  // inside (left) to outside (right)
 #define UNUSED_PINS
+
 
 #define MASTER_LEFT
 

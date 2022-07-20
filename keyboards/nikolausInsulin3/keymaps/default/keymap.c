@@ -1,20 +1,3 @@
-/* Copyright 2020 foostan
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
@@ -57,13 +40,7 @@ void x_reset(qk_tap_dance_state_t *state, void *user_data);
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT(MOD_LGUI, DE_UDIA):
-            return TAPPING_TERM + 200;
-        case LALT_T(DE_ODIA):
-            return TAPPING_TERM + 200;
-        case RALT_T(KC_DOT):
-            return TAPPING_TERM + 200;
-        case MT(MOD_RGUI, KC_J):
-            return TAPPING_TERM + 200; 
+            return TAPPING_TERM + 200; // also unnecessary 
         default:
             return TAPPING_TERM;
     }
@@ -190,11 +167,11 @@ void matrix_scan_user(void) {
         SEND_STRING(SS_LWIN(SS_TAP(X_H)));
     } */
 
-    /*
+    
     // Neo system tray application toggle
     SEQ_THREE_KEYS(KC_N, KC_E, KC_O) {
       SEND_STRING(SS_LSFT(SS_TAP(X_PAUSE)) SS_DELAY(5) SS_TAP(X_LSFT));
-    } */
+    } 
 
     /*
     // windows window rearrangement
@@ -271,6 +248,10 @@ void matrix_scan_user(void) {
       // English: German:  
       SEND_STRING("English"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"German"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     } 
+    SEQ_THREE_KEYS(KC_E, KC_G, KC_L) {
+      // English (anat.): German (anat.): Latin (anat.): 
+      SEND_STRING("English "SS_LSFT(SS_TAP(X_8))"anat."SS_LSFT(SS_TAP(X_9))SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"German "SS_LSFT(SS_TAP(X_8))"anat."SS_LSFT(SS_TAP(X_9))SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"Latin "SS_LSFT(SS_TAP(X_8))"anat."SS_LSFT(SS_TAP(X_9))SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
+    } 
     SEQ_FIVE_KEYS(KC_A, KC_L, KC_I, KC_A, KC_S) {
       // --- aliases: [] --- 
       SEND_STRING(""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_ENTER)"aliases"SS_LSFT(SS_TAP(X_DOT))" "SS_ALGR(SS_TAP(X_8))SS_ALGR(SS_TAP(X_9))SS_TAP(X_ENTER)""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
@@ -344,7 +325,7 @@ combo_t key_combos[COMBO_COUNT] = {
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/*
+
 [0] = LAYOUT(
     _______,                          _______,                TD(tapdanceHomeShiftHome),  KC_PGDOWN,       KC_PGUP,    TD(tapdanceEndShiftEnd), _______,                                      _______,       KC_LEFT,   KC_UP,      KC_DOWN,        KC_RIGHT,           _______,    _______, 
     TD(tapdanceMaximizeFullscreen),   TD(tapdanceEscAltF4),   KC_X,                       KC_V,            KC_L,       KC_C,                    KC_W,                                         KC_K,          KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
@@ -354,11 +335,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ), 
 // numpad and arrows layer
 [1] = LAYOUT(
-    TO(0),      _______,     _______,           _______,       _______,  _______,    _______,                                    _______,                   _______,    _______,    _______,       _______,                 _______,     _______,
-    _______,    _______,     KC_COMMA,          KC_7,          KC_8,     KC_9,       _______,                                    _______,                   C(KC_LEFT), KC_UP,      C(KC_RIGHT),   _______,                 _______,     _______,    
-    _______,    _______,     KC_DOT,            KC_4,          KC_5,     KC_6,       _______,                                    TD(tapdanceHomeShiftHome), KC_LEFT,    KC_DOWN,    KC_RIGHT,      TD(tapdanceEndShiftEnd), _______,     _______,    
-    _______,    _______,     KC_0,              KC_1,          KC_2,     KC_3,       _______,                                    _______,                   _______,    _______,    _______,       _______,                 _______,     _______,    
-    _______,    _______,     _______,           _______,       _______,  _______,    _______,    _______,            _______,    _______,                   _______,    _______,    _______,       _______,                 _______,     _______
+    TO(0),      _______,     _______,           _______,       _______,  _______,    _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,
+    _______,    _______,     KC_COMMA,          KC_7,          KC_8,     KC_9,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
+    _______,    _______,     KC_DOT,            KC_4,          KC_5,     KC_6,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
+    _______,    _______,     KC_0,              KC_1,          KC_2,     KC_3,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
+    _______,    _______,     _______,           _______,       _______,  _______,    _______,    _______,            _______,    _______,   _______,    _______,    _______,       _______,     _______,     _______
 ), 
 // special signs layer
 [2] = LAYOUT(
@@ -385,7 +366,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     _______,     _______,    _______,        _______,    _______,                                _______,    _______,    _______,    _______,    _______,    _______,    _______,    
     _______,    _______,     _______,     _______,    _______,        _______,    _______,    _______,        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 ), 
-*/
+
 // gaming layer 
 /*
 [5] = LAYOUT(
@@ -395,18 +376,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     KC_LSFT,     DE_Y,        KC_X,       KC_C,           KC_V,                                  KC_B,      KC_N,       KC_M,       KC_COMM,    KC_DOT,     DE_MINS,    _______, 
     _______,    _______,     _______,     _______,     _______,    KC_MS_BTN1,    _______,    KC_MS_BTN2,     _______,    _______,   _______,    _______,    _______,    _______,    _______,    _______
 ),
-
- */
+*/
+ 
 // testing layer
-
+/*
 [0] = LAYOUT(
     KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,               KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
     DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,               DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
     KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,               KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
     DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,               DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
-    KC_1, KC_2, KC_3, KC_4, KC_5, KC_X, KC_Y, KC_Z,   KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, DE_E
+    KC_1, KC_A, KC_3, KC_C, KC_5, KC_X, KC_Y, KC_Z,   KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, DE_E
 ), 
-
+*/
 };
 
 
@@ -457,19 +438,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
  * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
  *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
  *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
- *
- * Good places to put an advanced tap dance:
- *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
- *
- * Criteria for "good placement" of a tap dance key:
- *  Not a key that is hit frequently in a sentence
- *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
- *    in a web form. So 'tab' would be a poor choice for a tap dance.
- *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
- *    letter 'p', the word 'pepper' would be quite frustating to type.
- *
- * For the third point, there does exist the 'TD_DOUBLE_SINGLE_TAP', however this is not fully tested
- *
  */
 // maybe better implementation at example 5 here: 
 // https://docs.qmk.fm/#/feature_tap_dance?id=example-1-send-on-single-tap-on-double-tap
@@ -666,66 +634,3 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [tapdanceHomeShiftHome] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, homeshifthome_finished, homeshifthome_reset), 
 };
 
-
-
-
-/*
-led_config_t g_led_config = { {
-  // Key Matrix to LED Index
-  // left 
-  {   NO_LED, 0, 1, 2, 3, 4, NO_LED,},
-  {   5, 6, 7, 8, 9, 10, 11,},
-  {   12, 13, 14, 15, 16, 17, 18,},
-  {   19, 20, 21, 22, 23, 24, 25,},
-  {   NO_LED, NO_LED, NO_LED, NO_LED, 26, 27, 28,},
-  // right 
-  {   NO_LED, 29, 30, 31, 32, 33,  NO_LED,},
-  {   34, 35, 36, 37, 38, 39, 40,},
-  {   41, 42, 43, 44, 45, 46, 47,},
-  {   48, 49, 50, 51, 52, 53, 54,},
-  {   55, 56, 57, NO_LED, NO_LED, NO_LED, NO_LED,},
-},
- {
-  // LED Index to Physical Position
-  // horizontal: 224/(14-1) = 17.23
-  // vertical: 64/(5-1) = 16
-  // left 
-                { 16,  00 }, { 32,  00 }, { 48,  00 }, { 64,  00 }, { 80,  00 }, 
-  {  00,  16 }, { 16,  16 }, { 32,  16 }, { 48,  16 }, { 64,  16 }, { 80,  16 }, { 96,  16 },
-  {  00,  32 }, { 16,  32 }, { 32,  32 }, { 48,  32 }, { 64,  32 }, { 80,  32 }, { 96,  32 },
-  {  00,  48 }, { 16,  48 }, { 32,  48 }, { 48,  48 }, { 64,  48 }, { 80,  48 }, { 96,  48 },
-                                                       { 64,  64 }, { 80,  64 }, { 96,  64 }, 
-  // right 
-                { 128,  00 }, { 144,  00 }, { 160,  00 }, { 176,  00 }, { 192,  00 }, 
-  { 112,  16 }, { 128,  16 }, { 144,  16 }, { 160,  16 }, { 176,  16 }, { 192,  16 }, { 208,  16 },
-  { 112,  32 }, { 128,  32 }, { 144,  32 }, { 160,  32 }, { 176,  32 }, { 192,  32 }, { 208,  32 },
-  { 112,  48 }, { 128,  48 }, { 144,  48 }, { 160,  48 }, { 176,  48 }, { 192,  48 }, { 208,  48 },
-  { 112,  64 }, { 128,  64 }, { 144,  64 }, 
-}, {
-  // LED Index to Flag
-  // left 
-  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
-  // right 
-  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
-} };
-*/
-
-/*
-void suspend_power_down_kb(void) {
-    rgb_matrix_set_suspend_state(true);
-    suspend_power_down_user();
-}
-
-void suspend_wakeup_init_kb(void) {
-    rgb_matrix_set_suspend_state(false);
-    suspend_wakeup_init_user();
-}
-*/
-
-/*
-    KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
-    DE_E, TO(0),DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
-    KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7,       KC_8, KC_9, KC_0, DE_A, DE_B, DE_C, DE_D, 
-    DE_E, DE_F, DE_G, DE_H, DE_I, DE_J, DE_K,       DE_L, DE_M, DE_N, DE_O, DE_P, DE_Q, DE_R, 
-                      KC_1,    KC_2,    KC_3,       KC_4,    KC_5,   KC_6
-                      */
