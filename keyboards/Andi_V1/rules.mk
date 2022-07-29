@@ -30,8 +30,8 @@ LEADER_ENABLE = yes
 
 # RGB LED stuff 
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
-#RGBLIGHT_ENABLE = yes        # Enable keyboard RGB underglow
-RGB_MATRIX_ENABLE = no
-#RGB_MATRIX_DRIVER = WS2812
+RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
+RGB_MATRIX_ENABLE = yes
+RGB_MATRIX_DRIVER = WS2812
 
 ENCODER_ENABLE = yes

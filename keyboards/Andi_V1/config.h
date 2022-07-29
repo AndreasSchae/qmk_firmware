@@ -83,6 +83,57 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* RGB light config */
 #define RGB_DI_PIN D3
 
+#ifdef RGB_DI_PIN
+#    define RGBLED_NUM 35
+#    define RGBLIGHT_HUE_STEP 4
+#    define RGBLIGHT_SAT_STEP 8
+#    define RGBLIGHT_VAL_STEP 8
+#    define RGBLIGHT_LIMIT_VAL 150 /* The maximum brightness level */
+#    define RGBLIGHT_SLEEP         /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+                                   /*== all animations enable ==*/
+//#    define RGBLIGHT_ANIMATIONS
+// /*== or choose animations ==*/
+//   #define RGBLIGHT_EFFECT_BREATHING
+//   #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+//   #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+//   #define RGBLIGHT_EFFECT_SNAKE
+//   #define RGBLIGHT_EFFECT_KNIGHT
+//   #define RGBLIGHT_EFFECT_CHRISTMAS
+//   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+   #define RGBLIGHT_EFFECT_RGB_TEST
+//   #define RGBLIGHT_EFFECT_ALTERNATING
+// /*== customize breathing effect ==*/
+//   /*==== (DEFAULT) use fixed table instead of exp() and sin() ====*/
+//   #define RGBLIGHT_BREATHE_TABLE_SIZE 256      // 256(default) or 128 or 64
+//   /*==== use exp() and sin() ====*/
+//   #define RGBLIGHT_EFFECT_BREATHE_CENTER 1.85  // 1 to 2.7
+//   #define RGBLIGHT_EFFECT_BREATHE_MAX    255   // 0 to 255
+#endif
+
+#ifdef RGB_MATRIX_ENABLE
+#    define DRIVER_LED_TOTAL 35
+#    define RGB_MATRIX_LED_FLUSH_LIMIT 16
+#    define RGB_MATRIX_STARTUP_VAL 150
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //#define RGBLED_NUM 29
 /*
 #define RGBLIGHT_VAL_STEP 17
@@ -94,7 +145,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define RGBLIGHT_EFFECT_BREATHE_CENTER 2.0
 //#define RGBLIGHT_EFFECT_BREATHE_MAX 255
 
-#ifdef RGB_MATRIX_ENABLE
+/*#ifdef RGB_MATRIX_ENABLE
 // The number of LEDs connected
 #    define DRIVER_LED_TOTAL 58
 #    define RGBLIGHT_SPLIT
@@ -156,6 +207,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #  define ENABLE_RGB_MATRIX_SOLID_SPLASH                // Hue & value pulse away from a single key hit then fades value out
 // #  define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH           // Hue & value pulse away from multiple key hits then fades value out
 #endif
+*/
+
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5

@@ -135,7 +135,7 @@ void matrix_scan_user(void) {
     leader_end();
 
     
-    SEQ_TWO_KEYS(KC_S, KC_S) {
+    /*SEQ_TWO_KEYS(KC_S, KC_S) {
       // make windows screenshot
       SEND_STRING(SS_LWIN(SS_TAP(X_PSCREEN))); 
     }
@@ -143,7 +143,7 @@ void matrix_scan_user(void) {
         // windows snipping tool
         SEND_STRING(SS_LWIN(SS_LSFT(SS_TAP(X_S))));
     }
-    /*
+    
     SEQ_FOUR_KEYS(KC_T, KC_A, KC_S, KC_K) {
         // windows task manager
         SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_ESC))));
@@ -169,10 +169,10 @@ void matrix_scan_user(void) {
 
     
     // Neo system tray application toggle
-    SEQ_THREE_KEYS(KC_N, KC_E, KC_O) {
+    /*SEQ_THREE_KEYS(KC_N, KC_E, KC_O) {
       SEND_STRING(SS_LSFT(SS_TAP(X_PAUSE)) SS_DELAY(5) SS_TAP(X_LSFT));
     } 
-
+    */
     /*
     // windows window rearrangement
     // note how n is left arrow, r is down arrow, t is right arrow, g is up arrow
@@ -236,7 +236,7 @@ void matrix_scan_user(void) {
     } */
     
     // MACROS FOR OBSIDIAN & ANKI 
-    SEQ_ONE_KEY(KC_Q) {
+    /*SEQ_ONE_KEY(KC_Q) {
       // Q: A: 
       SEND_STRING("Q"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     }
@@ -256,7 +256,7 @@ void matrix_scan_user(void) {
       // --- aliases: [] --- 
       SEND_STRING(""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_ENTER)"aliases"SS_LSFT(SS_TAP(X_DOT))" "SS_ALGR(SS_TAP(X_8))SS_ALGR(SS_TAP(X_9))SS_TAP(X_ENTER)""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     } 
-
+    */
     // KEYBOARD COMMANDS
     SEQ_FIVE_KEYS(KC_R, KC_E, KC_S, KC_E, KC_T) {
       // reset keyboard into bootloader mode
@@ -289,7 +289,7 @@ void keyboard_post_init_user(void) {
     rgb_matrix_mode_noeeprom(default_animation);
     rgb_matrix_set_speed_noeeprom(default_speed);
     */
-    //rgb_matrix_set_color_all(255, 0, 0);
+    rgb_matrix_set_color_all(0, 255, 0);
 }
 
 
