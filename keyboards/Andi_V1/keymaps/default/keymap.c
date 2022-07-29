@@ -289,7 +289,8 @@ void keyboard_post_init_user(void) {
     rgb_matrix_mode_noeeprom(default_animation);
     rgb_matrix_set_speed_noeeprom(default_speed);
     */
-    rgb_matrix_set_color_all(0, 255, 0);
+    //rgb_matrix_set_color_all(0, 255, 0);
+    rgb_matrix_sethsv(170, 255, 150);
 }
 
 
