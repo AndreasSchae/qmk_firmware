@@ -45,7 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // row pins left keyboard
 #define MATRIX_ROW_PINS \
-    { D0, D4, C6, D7, E6 }  // top to bottom
+    { D4, C6, D7, E6, B4 }  // top to bottom
 
 // column pins left keyboard
 #define MATRIX_COL_PINS \
@@ -53,10 +53,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // row pins right keyboard
 #define MATRIX_ROW_PINS_RIGHT \
-    { B3, B1, F7, F6, F5, F4 }  // top to bottom
+    { D4, C6, D7, E6, B4 }  // top to bottom
 // column pins right keyboard
 #define MATRIX_COL_PINS_RIGHT \
-    { B6, B5, B4, E6, D7, B2 }  // inside (left) to outside (right)
+    { F4, F5, F6, F7, B1, B3, B2 }  // inside (left) to outside (right)
 #define UNUSED_PINS
 
 
@@ -70,38 +70,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #define SOFT_SERIAL_PIN D2  // or D1, D2, D3, E6
 
-//#define BACKLIGHT_PIN B7
-//#define BACKLIGHT_LEVELS 3
-//#define BACKLIGHT_BREATHING
-
 /* RGB light config */
 #define RGB_DI_PIN D3
 
-#ifdef RGB_DI_PIN
-#    define RGBLED_NUM 35
-#    define RGBLIGHT_HUE_STEP 4
-#    define RGBLIGHT_SAT_STEP 8
-#    define RGBLIGHT_VAL_STEP 8
-#    define RGBLIGHT_LIMIT_VAL 150 /* The maximum brightness level */
-#    define RGBLIGHT_SLEEP         /* If defined, the RGB lighting will be switched off when the host goes to sleep */
-                                   /*== all animations enable ==*/
+//#ifdef RGB_DI_PIN
+//#    define RGBLED_NUM 70
+//#    define RGBLIGHT_HUE_STEP 4
+//#    define RGBLIGHT_SAT_STEP 8
+//#    define RGBLIGHT_VAL_STEP 8
+//#    define RGBLIGHT_LIMIT_VAL 150 /* The maximum brightness level */
+//#    define RGBLIGHT_SLEEP         /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+//                                   /*== all animations enable ==*/
+//#endif
 
-// /*== choose animations ==*/
-//   #define RGBLIGHT_EFFECT_BREATHING
-
+#define DRIVER_LED_TOTAL 70
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
+#define RGB_MATRIX_LED_FLUSH_LIMIT 16
+#define RGB_MATRIX_STARTUP_VAL 150
+#define RGB_MATRIX_SPLIT {35,35}
+// /*== choose animations ==*/
 //#define RGBLIGHT_EFFECT_RGB_TEST
 //#define RGBLIGHT_EFFECT_ALTERNATING
 #define ENABLE_RGB_MATRIX_BREATHING
 
-#endif
 
-#ifdef RGB_MATRIX_ENABLE
-#    define DRIVER_LED_TOTAL 35
-#    define RGB_MATRIX_LED_FLUSH_LIMIT 16
-#    define RGB_MATRIX_STARTUP_VAL 150
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
-#endif
+
+
 
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
@@ -165,13 +159,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define BOOTMAGIC_LITE_ROW 0
 //#define BOOTMAGIC_LITE_COLUMN 0
 
-#define COMBO_COUNT 3
-#define COMBO_TERM 100
+//#define COMBO_COUNT 3
+//#define COMBO_TERM 100
 
-#define TAPPING_TERM 200
-#define TAPPING_TERM_PER_KEY
-
-#define IGNORE_MOD_TAP_INTERRUPT
+//#define TAPPING_TERM 200
+//#define TAPPING_TERM_PER_KEY
+//
+//#define IGNORE_MOD_TAP_INTERRUPT
 
 #define AUTO_SHIFT_TIMEOUT 150
 #define NO_AUTO_SHIFT_SPECIAL

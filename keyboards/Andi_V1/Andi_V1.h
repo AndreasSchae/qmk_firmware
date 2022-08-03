@@ -27,11 +27,6 @@
  * represents the switch matrix.
  */
 
-// row pins arduino code: 16, 14, 15, A0, A1. from bottom to top
-// #define MATRIX_ROW_PINS { B2, B3, B1, F7, F6}
-// column pins arduino code: 4, 5, 6, 7, 8, 9, 10. from inside to outside 
-// #define MATRIX_COL_PINS { D4, C6, D7, E6, B4, B5, B6}
-
  #define LAYOUT( \
  	L11, L12, L13, L14, L15, L16,    					     R16, R15, R14, R13, R12, R11, \
  	L21, L22, L23, L24, L25, L26, L27, 					R27, R26, R25, R24, R23, R22, R21, \
