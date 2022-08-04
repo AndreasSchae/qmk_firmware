@@ -55,9 +55,8 @@ enum custom_keycodes {
     ALT_TAB = SAFE_RANGE,
     CIRCUM,
     BACKTICK,
-    MINMZE,
-    CSTRST, 
     CSTSETRED, 
+    CSTSETOFF, 
     CSTSETBLUE, 
 };
 
@@ -94,24 +93,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_TAB);
       }
       break;
-    case MINMZE: 
-    // minimize all windows
+    case CSTSETRED:
       if (record->event.pressed) {
-        SEND_STRING(SS_LWIN(SS_TAP(X_M)));
-      } else {    
-        // 
-      }
-      break;
-    case CSTRST:
-      if (record->event.pressed) {
-          reset_keyboard();
+          //rgb_matrix_set_color_all(255, 0, 0);
+          rgb_matrix_sethsv(0, 255, 150);
       } else {
           //
       }
       break;
-    case CSTSETRED:
+    case CSTSETOFF:
       if (record->event.pressed) {
           //rgb_matrix_set_color_all(255, 0, 0);
+          rgb_matrix_sethsv(0, 255, 0);
       } else {
           //
       }
@@ -119,6 +112,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CSTSETBLUE:
       if (record->event.pressed) {
           //rgb_matrix_set_color_all(0, 0, 255);
+          rgb_matrix_sethsv(240, 255, 150);
       } else {
           //
       }
@@ -236,6 +230,7 @@ void matrix_scan_user(void) {
     } */
     
     // MACROS FOR OBSIDIAN & ANKI 
+    
     SEQ_ONE_KEY(KC_Q) {
       // Q: A: 
       SEND_STRING("Q"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_ENTER)"A"SS_LSFT(SS_TAP(X_DOT))" "SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
@@ -257,12 +252,12 @@ void matrix_scan_user(void) {
       SEND_STRING(""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_ENTER)"aliases"SS_LSFT(SS_TAP(X_DOT))" "SS_ALGR(SS_TAP(X_8))SS_ALGR(SS_TAP(X_9))SS_TAP(X_ENTER)""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     } 
 
+    
     // KEYBOARD COMMANDS
     SEQ_FIVE_KEYS(KC_R, KC_E, KC_S, KC_E, KC_T) {
       // reset keyboard into bootloader mode
       reset_keyboard();
     }
-    
 
   }
   
@@ -290,47 +285,19 @@ void keyboard_post_init_user(void) {
     rgb_matrix_set_speed_noeeprom(default_speed);
     */
     //rgb_matrix_set_color_all(255, 0, 0);
+    rgb_matrix_sethsv(0, 255, 150);
 }
 
 
-
-// when adding combos change combocount in config.h
-
-enum combos {
-  //winCombo,
-  //altCombo, 
-  //superAltTabCombo, 
-  shiftCombo, 
-  shiftCombo2, 
-  shiftComboR, 
-};
-
-//const uint16_t PROGMEM ueuo_combo[] = {DE_UE, DE_OE, COMBO_END};
-//const uint16_t PROGMEM oeae_combo[] = {DE_OE, DE_AE, COMBO_END};
-//const uint16_t PROGMEM superalttab_combo[] = {KC_C, KC_W, COMBO_END};
-const uint16_t PROGMEM shift_combo[] = {KC_TAB, KC_U, COMBO_END};
-const uint16_t PROGMEM shift2_combo[] = {KC_TAB, KC_DOT, COMBO_END};
-const uint16_t PROGMEM shiftR_combo[] = {KC_D, DE_Y, COMBO_END};
-//const uint16_t PROGMEM layer_combo[] = {KC_C, KC_W, COMBO_END};
-
-
-combo_t key_combos[COMBO_COUNT] = {
-  //[winCombo] = COMBO(ueuo_combo, KC_LWIN),
-  //[altCombo] = COMBO(oeae_combo, KC_LALT), 
-  //[superAltTabCombo] = COMBO(superalttab_combo, ALT_TAB), 
-  [shiftCombo] = COMBO(shift_combo, KC_LSHIFT),
-  [shiftCombo2] = COMBO(shift2_combo, KC_LSHIFT),
-  [shiftComboR] = COMBO(shiftR_combo, KC_RSHIFT),
-};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [0] = LAYOUT(
     _______,                          _______,                TD(tapdanceHomeShiftHome),  KC_PGDOWN,       KC_PGUP,    TD(tapdanceEndShiftEnd), _______,                                      _______,       KC_LEFT,   KC_UP,      KC_DOWN,        KC_RIGHT,           _______,    _______, 
-    TD(tapdanceMaximizeFullscreen),   TD(tapdanceEscAltF4),   KC_X,                       KC_V,            KC_L,       KC_C,                    KC_W,                                         KC_K,          KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      KC_MS_WH_UP,    
-    ALT_TAB,                          KC_TAB,                 KC_U,                       KC_I,            KC_A,       KC_E,                    KC_O,                                         KC_S,          KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       KC_MS_WH_DOWN,    
-    TD(tapdanceMin1MinAll),           KC_LSFT,                DE_UDIA,                    DE_ODIA,         DE_ADIA,    KC_P,                    DE_Z,                                         KC_B,          KC_M,      KC_COMMA,   KC_DOT,         KC_J,               KC_RSFT,    _______,    
+    TD(tapdanceMaximizeFullscreen),   TD(tapdanceEscAltF4),   KC_X,                       KC_V,            KC_L,       KC_C,                    KC_W,                                         KC_K,          KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      CSTSETBLUE,    
+    ALT_TAB,                          KC_TAB,                 KC_U,                       KC_I,            KC_A,       KC_E,                    KC_O,                                         KC_S,          KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       CSTSETRED,    
+    TD(tapdanceMin1MinAll),           KC_LSFT,                DE_UDIA,                    DE_ODIA,         DE_ADIA,    KC_P,                    DE_Z,                                         KC_B,          KC_M,      KC_COMMA,   KC_DOT,         KC_J,               KC_RSFT,    CSTSETOFF,    
     _______,                          KC_LCTRL,               KC_LGUI,                    KC_LALT,         KC_LEAD,    KC_BSPACE,               TD(tapdanceSpace),   KC_DOWN,          TG(1), OSM(MOD_LSFT), OSL(2),    KC_LEAD,    KC_RALT,        KC_RGUI,            KC_RCTRL,   _______
   ), 
 // numpad and arrows layer
@@ -349,7 +316,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     DE_HASH,       DE_DLR,       DE_PIPE,     DE_TILD,      BACKTICK,                                   DE_PLUS,        DE_PERC,      DE_DQUO,     DE_QUOT,   DE_SCLN,    _______,    _______,    
     _______,    _______,     _______,       _______,      _______,     KC_DEL,       _______,    _______,            _______,    _______,        _______,      _______,     _______,   _______,    _______,    _______
 ), 
-
+/*
 // qwertz layer
 [3] = LAYOUT(
     TO(0),      _______,     KC_1,        KC_2,       KC_3,           KC_4,        KC_5,                                   KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       DE_SS,      _______,
@@ -366,7 +333,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     _______,     _______,    _______,        _______,    _______,                                _______,    _______,    _______,    _______,    _______,    _______,    _______,    
     _______,    _______,     _______,     _______,    _______,        _______,    _______,    _______,        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 ), 
-
+*/
 // gaming layer 
 /*
 [5] = LAYOUT(
@@ -395,63 +362,63 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (get_highest_layer(layer_state|default_layer_state) > 0) {
         if (index == 0) {
             if (clockwise) {
-                // tap_code(KC_WH_D);
-                SEND_STRING("clockwise index 0"); 
+                tap_code(KC_DOWN);
+                // SEND_STRING("clockwise index 0"); 
             } else {
-                // tap_code(KC_WH_U);
-                SEND_STRING("counterclockwise index 0"); 
+                tap_code(KC_UP);
+                // SEND_STRING("counterclockwise index 0"); 
 
             }
         } else if (index == 1) {
             if (clockwise) {
-                // SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
-                SEND_STRING("clockwise index 0"); 
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
+                // SEND_STRING("clockwise index 0"); 
 
             } else {
-                // SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
-                SEND_STRING("counterclockwise index 0"); 
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
+                // SEND_STRING("counterclockwise index 0"); 
 
             }
         }
     } else {  /* Layer 0 */
         if (index == 0) {
             if (clockwise) {
-                // tap_code(KC_PGDN);
-                SEND_STRING("clockwise index 0"); 
+                tap_code(KC_PGDN);
+                // SEND_STRING("clockwise index 0"); 
 
             } else {
-                // tap_code(KC_PGUP);
-                SEND_STRING("counterclockwise index 0"); 
+                tap_code(KC_PGUP);
+                // SEND_STRING("counterclockwise index 0"); 
 
             }
         } else if (index == 1) {
             if (clockwise) {
-                // tap_code(KC_WH_D);
-                SEND_STRING("clockwise index 1"); 
+                tap_code(KC_DOWN);
+                // SEND_STRING("clockwise index 1"); 
 
             } else {
-                // tap_code(KC_WH_U);
-                SEND_STRING("counterclockwise index 1"); 
+                tap_code(KC_UP);
+                // SEND_STRING("counterclockwise index 1"); 
 
             }
         } else if (index == 2) {
             if (clockwise) {
-                tap_code(KC_WH_D);
+                tap_code(KC_DOWN);
                 // SEND_STRING("clockwise index 2"); 
 
             } else {
-                tap_code(KC_WH_U);
+                tap_code(KC_UP);
                 // SEND_STRING("counterclockwise index 2"); 
 
             }
         } else if (index == 3) {
             if (clockwise) {
-                // tap_code(KC_WH_D);
-                SEND_STRING("clockwise index 3"); 
+                tap_code(KC_DOWN);
+                // SEND_STRING("clockwise index 3"); 
 
             } else {
-                // tap_code(KC_WH_U);
-                SEND_STRING("counterclockwise index 3"); 
+                tap_code(KC_UP);
+                // SEND_STRING("counterclockwise index 3"); 
 
             }
         }
