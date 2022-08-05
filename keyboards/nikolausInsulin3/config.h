@@ -88,9 +88,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_MATRIX_SPLIT \
     { 3, 3 }
 // /*== choose animations ==*/
-#define RGBLIGHT_EFFECT_RGB_TEST
+// #define RGBLIGHT_EFFECT_RGB_TEST
 //#define RGBLIGHT_EFFECT_ALTERNATING
-// #define ENABLE_RGB_MATRIX_BREATHING
+#define ENABLE_RGB_MATRIX_BREATHING
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5

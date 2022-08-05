@@ -56,8 +56,9 @@ enum custom_keycodes {
     CIRCUM,
     BACKTICK,
     CSTSETRED, 
-    CSTSETOFF, 
+    CSTSETTOGGLE, 
     CSTSETBLUE, 
+    CSTSETBREATHE, 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -101,10 +102,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           //
       }
       break;
-    case CSTSETOFF:
+    case CSTSETTOGGLE:
       if (record->event.pressed) {
           //rgb_matrix_set_color_all(255, 0, 0);
-          rgb_matrix_sethsv(0, 255, 0);
+        //   rgb_matrix_sethsv(0, 255, 0);
+        rgb_matrix_toggle(); 
       } else {
           //
       }
@@ -113,6 +115,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
           //rgb_matrix_set_color_all(0, 0, 255);
           rgb_matrix_sethsv(240, 255, 150);
+      } else {
+          //
+      }
+      break;
+    case CSTSETBREATHE:
+      if (record->event.pressed) {
+          //rgb_matrix_set_color_all(0, 0, 255);
+        //   rgb_matrix_sethsv(240, 255, 150);
+        // rgb_matrix_mode(RGB_MATRIX_BREATHING); 
+        rgb_matrix_step();
       } else {
           //
       }
@@ -297,8 +309,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,                          _______,                TD(tapdanceHomeShiftHome),  KC_PGDOWN,       KC_PGUP,    TD(tapdanceEndShiftEnd), _______,                                      _______,       KC_LEFT,   KC_UP,      KC_DOWN,        KC_RIGHT,           _______,    _______, 
     TD(tapdanceMaximizeFullscreen),   TD(tapdanceEscAltF4),   KC_X,                       KC_V,            KC_L,       KC_C,                    KC_W,                                         KC_K,          KC_H,      KC_G,       KC_F,           KC_Q,               DE_SS,      CSTSETBLUE,    
     ALT_TAB,                          KC_TAB,                 KC_U,                       KC_I,            KC_A,       KC_E,                    KC_O,                                         KC_S,          KC_N,      KC_R,       KC_T,           KC_D,               DE_Y,       CSTSETRED,    
-    TD(tapdanceMin1MinAll),           KC_LSFT,                DE_UDIA,                    DE_ODIA,         DE_ADIA,    KC_P,                    DE_Z,                                         KC_B,          KC_M,      KC_COMMA,   KC_DOT,         KC_J,               KC_RSFT,    CSTSETOFF,    
-    _______,                          KC_LCTRL,               KC_LGUI,                    KC_LALT,         KC_LEAD,    KC_BSPACE,               TD(tapdanceSpace),   KC_DOWN,          TG(1), OSM(MOD_LSFT), OSL(2),    KC_LEAD,    KC_RALT,        KC_RGUI,            KC_RCTRL,   _______
+    TD(tapdanceMin1MinAll),           KC_LSFT,                DE_UDIA,                    DE_ODIA,         DE_ADIA,    KC_P,                    DE_Z,                                         KC_B,          KC_M,      KC_COMMA,   KC_DOT,         KC_J,               KC_RSFT,    CSTSETTOGGLE,    
+    _______,                          KC_LCTRL,               KC_LGUI,                    KC_LALT,         KC_LEAD,    KC_BSPACE,               TD(tapdanceSpace),   KC_DOWN,          TG(1), OSM(MOD_LSFT), OSL(2),    KC_LEAD,    KC_RALT,        KC_RGUI,            KC_RCTRL,   CSTSETBREATHE
   ), 
 // numpad and arrows layer
 [1] = LAYOUT(
