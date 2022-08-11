@@ -171,15 +171,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define BOOTMAGIC_LITE_COLUMN_LEFT 0
 
 #define ENCODERS_PAD_A \
-    { D0, F5 }
+    { D0, C6 }
 #define ENCODERS_PAD_B \
-    { D1, F4 }
+    { D1, D4 }
 #define ENCODER_RESOLUTIONS \
     { 4, 4 }
 
 #define ENCODERS_PAD_A_RIGHT \
-    { D0, F5 }
+    { C6, D1 }
 #define ENCODERS_PAD_B_RIGHT \
-    { D1, F4 }
+    { D4, D0 }
 #define ENCODER_RESOLUTIONS_RIGHT \
     { 4, 4 }

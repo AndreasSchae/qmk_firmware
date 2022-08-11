@@ -264,6 +264,12 @@ void matrix_scan_user(void) {
       SEND_STRING(""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_ENTER)"aliases"SS_LSFT(SS_TAP(X_DOT))" "SS_ALGR(SS_TAP(X_8))SS_ALGR(SS_TAP(X_9))SS_TAP(X_ENTER)""SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_SLSH)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT));
     } 
 
+    // OTHER STUFF
+    SEQ_THREE_KEYS(KC_M, KC_F, KC_G) {
+      // English (anat.): German (anat.): Latin (anat.): 
+      SEND_STRING("mit freundlichen Gr"SS_TAP(X_LBRC)SS_TAP(X_MINS)"en, "SS_LSFT(SS_TAP(X_ENTER))"Niklas Enslin");
+    } 
+
     
     // KEYBOARD COMMANDS
     SEQ_FIVE_KEYS(KC_R, KC_E, KC_S, KC_E, KC_T) {
@@ -375,63 +381,68 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         if (index == 0) {
             if (clockwise) {
                 tap_code(KC_DOWN);
-                // SEND_STRING("clockwise index 0"); 
+                SEND_STRING("clockwise index 0 layer > 0"); 
             } else {
                 tap_code(KC_UP);
                 // SEND_STRING("counterclockwise index 0"); 
-
             }
         } else if (index == 1) {
             if (clockwise) {
                 SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
-                // SEND_STRING("clockwise index 0"); 
-
+                // SEND_STRING("clockwise index 1 layer > 0"); 
             } else {
                 SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
-                // SEND_STRING("counterclockwise index 0"); 
-
+                // SEND_STRING("counterclockwise index 1"); 
+            }
+        } else if (index == 2) {
+            if (clockwise) {
+                tap_code(KC_DOWN);
+                SEND_STRING("clockwise index 2 layer > 0"); 
+            } else {
+                tap_code(KC_UP);
+                // SEND_STRING("counterclockwise index 2"); 
+            }
+        } else if (index == 3) {
+            if (clockwise) {
+                tap_code(KC_DOWN);
+                SEND_STRING("clockwise index 3 layer > 0"); 
+            } else {
+                tap_code(KC_UP);
+                // SEND_STRING("counterclockwise index 3"); 
             }
         }
     } else {  /* Layer 0 */
         if (index == 0) {
             if (clockwise) {
-                tap_code(KC_PGDN);
+                SEND_STRING(SS_LALT(SS_TAP(X_PGUP)));
                 // SEND_STRING("clockwise index 0"); 
-
             } else {
-                tap_code(KC_PGUP);
+                SEND_STRING(SS_LALT(SS_TAP(X_PGDOWN)));
                 // SEND_STRING("counterclockwise index 0"); 
-
             }
         } else if (index == 1) {
             if (clockwise) {
-                tap_code(KC_DOWN);
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
                 // SEND_STRING("clockwise index 1"); 
-
             } else {
-                tap_code(KC_UP);
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGDOWN)));
                 // SEND_STRING("counterclockwise index 1"); 
-
             }
         } else if (index == 2) {
             if (clockwise) {
-                tap_code(KC_DOWN);
+                SEND_STRING(SS_LALT(SS_TAP(X_RIGHT)));
                 // SEND_STRING("clockwise index 2"); 
-
             } else {
-                tap_code(KC_UP);
+                SEND_STRING(SS_LALT(SS_TAP(X_LEFT)));
                 // SEND_STRING("counterclockwise index 2"); 
-
             }
         } else if (index == 3) {
             if (clockwise) {
-                tap_code(KC_DOWN);
+                tap_code(KC_VOLU);
                 // SEND_STRING("clockwise index 3"); 
-
             } else {
-                tap_code(KC_UP);
+                tap_code(KC_VOLD);
                 // SEND_STRING("counterclockwise index 3"); 
-
             }
         }
     }
