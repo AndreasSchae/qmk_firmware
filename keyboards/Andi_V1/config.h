@@ -21,10 +21,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID 0x3265
-#define PRODUCT_ID 0x0005
-#define DEVICE_VER 0x0001
-#define MANUFACTURER NikolausInsulin
-#define PRODUCT PieceOfGarbage
+#define PRODUCT_ID 0x0004
+#define DEVICE_VER 0x0002
+#define MANUFACTURER AndiEnterprise
+#define PRODUCT RIPPuchi
 /* key matrix size */
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 7
@@ -60,28 +60,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define UNUSED_PINS
 
 
-#define MASTER_LEFT
+
 
 /* COL2ROW, ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
+
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
+#define USE_SERIAL
 #define SOFT_SERIAL_PIN D2  // or D1, D2, D3, E6
+
+#define MASTER_LEFT
+
+
+#define RGBLIGHT_SPLIT
+#define SPLIT_USB_DETECT
 
 /* RGB light config */
 #define RGB_DI_PIN D3
-
-//#ifdef RGB_DI_PIN
-//#    define RGBLED_NUM 70
-//#    define RGBLIGHT_HUE_STEP 4
-//#    define RGBLIGHT_SAT_STEP 8
-//#    define RGBLIGHT_VAL_STEP 8
-//#    define RGBLIGHT_LIMIT_VAL 150 /* The maximum brightness level */
-//#    define RGBLIGHT_SLEEP         /* If defined, the RGB lighting will be switched off when the host goes to sleep */
-//                                   /*== all animations enable ==*/
-//#endif
 
 #define DRIVER_LED_TOTAL 70
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
@@ -109,63 +107,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
-/* If defined, GRAVE_ESC will always act as ESC when CTRL is held.
- * This is useful for the Windows task manager shortcut (ctrl+shift+esc).
- */
-//#define GRAVE_ESC_CTRL_OVERRIDE
 
-/*
- * Force NKRO
- *
- * Force NKRO (nKey Rollover) to be enabled by default, regardless of the saved
- * state in the bootmagic EEPROM settings. (Note that NKRO must be enabled in the
- * makefile for this to work.)
- *
- * If forced on, NKRO can be disabled via magic key (default = LShift+RShift+N)
- * until the next keyboard reset.
- *
- * NKRO may prevent your keystrokes from being detected in the BIOS, but it is
- * fully operational during normal computer usage.
- *
- * For a less heavy-handed approach, enable NKRO via magic key (LShift+RShift+N)
- * or via bootmagic (hold SPACE+N while plugging in the keyboard). Once set by
- * bootmagic, NKRO mode will always be enabled until it is toggled again during a
- * power-up.
- *
- */
-//#define FORCE_NKRO
-
-/*
- * Feature disable options
- *  These options are also useful to firmware size reduction.
- */
-
-/* disable debug print */
-//#define NO_DEBUG
-
-/* disable print */
-//#define NO_PRINT
-
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
 
 /* disable these deprecated features by default */
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 
-/* Bootmagic Lite key configuration */
-//#define BOOTMAGIC_LITE_ROW 0
-//#define BOOTMAGIC_LITE_COLUMN 0
 
-//#define COMBO_COUNT 3
-//#define COMBO_TERM 100
-
-//#define TAPPING_TERM 200
-//#define TAPPING_TERM_PER_KEY
-//
-//#define IGNORE_MOD_TAP_INTERRUPT
 
 #define AUTO_SHIFT_TIMEOUT 150
 #define NO_AUTO_SHIFT_SPECIAL
@@ -173,18 +121,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LEADER_TIMEOUT 400
 #define LEADER_PER_KEY_TIMING
 
-//#define BOOTMAGIC_LITE_ROW_LEFT 0
-//#define BOOTMAGIC_LITE_COLUMN_LEFT 0
 
-#define ENCODERS_PAD_A \
-    { D0, F5 }
-#define ENCODERS_PAD_B \
-    { D1, F4 }
-#define ENCODER_RESOLUTIONS \
-    { 4, 4 }
-
-/*
-#define ENCODERS_PAD_A_RIGHT {  }
-#define ENCODERS_PAD_B_RIGHT {  }
-#define ENCODER_RESOLUTIONS_RIGHT {  }
-*/
