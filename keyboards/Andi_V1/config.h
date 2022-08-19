@@ -113,6 +113,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 
+#define COMBO_COUNT 0
+#define COMBO_TERM 100
+
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
+
+#define IGNORE_MOD_TAP_INTERRUPT
 
 
 #define AUTO_SHIFT_TIMEOUT 150
