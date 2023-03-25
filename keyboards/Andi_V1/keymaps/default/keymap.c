@@ -152,9 +152,55 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 //
             }
             break;
+        //case TG(0):
+        //    if (record->event.pressed) {
+        //        // rgb_matrix_set_color_all(0, 0, 255);
+        //        //   rgb_matrix_sethsv(240, 255, 150);
+        //        // rgb_matrix_mode(RGB_MATRIX_BREATHING);
+        //        rgb_matrix_sethsv(170, 255, 150);
+        //    } else {
+        //        //
+        //    }
+        //    break;
+        //case TG(1):
+        //    if (record->event.pressed) {
+        //        // rgb_matrix_set_color_all(0, 0, 255);
+        //        //   rgb_matrix_sethsv(240, 255, 150);
+        //        // rgb_matrix_mode(RGB_MATRIX_BREATHING);
+        //        rgb_matrix_sethsv(85, 255, 150);
+        //    } else {
+        //        //
+        //    }
+        //    break;
+        //case TG(2):
+        //    if (record->event.pressed) {
+        //        // rgb_matrix_set_color_all(0, 0, 255);
+        //        //   rgb_matrix_sethsv(240, 255, 150);
+        //        // rgb_matrix_mode(RGB_MATRIX_BREATHING);
+        //        rgb_matrix_sethsv(0, 255, 150);
+        //    } else {
+        //        //
+        //    }
+        //    break;
     }
     return true;
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case 1:
+            rgb_matrix_sethsv(85, 255, 150);
+            break;
+        case 2:
+            rgb_matrix_sethsv(0, 255, 150);
+            break;
+        default:
+            rgb_matrix_sethsv(170, 255, 150);
+            break;
+
+    }
+    return state;
+}
 
 // all leader key commands go here
 LEADER_EXTERNS();
@@ -287,18 +333,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Base layer
 
 [0] = LAYOUT(
-    CSTSETBREATHE,  _______,    KC_3,       KC_PGDOWN,  KC_PGUP,    KC_6,                                                         KC_LEFT,    KC_UP,      KC_DOWN,    KC_RIGHT,   _______,    _______, 
+    CSTSETBREATHE,  _______,    _______,    KC_MNXT,    KC_MPLY,    KC_PSCR,                                                         KC_LEFT,    KC_UP,      KC_DOWN,    KC_RIGHT,   _______,    _______, 
     CSTSETGREEN,    KC_ESC,     DE_J,       DE_D,       DE_U,       DE_A,       DE_X,                               KC_P,            KC_H,       KC_L,       KC_M,       KC_W,       DE_SS,      CSTSETBREATHE, 
     CSTSETRED,      KC_TAB,     KC_C,       KC_T,       KC_I,       KC_E,       KC_O,                               KC_B,            KC_N,       KC_R,       KC_S,       KC_G,       KC_Q,       CSTSETRED, 
     CSTSETBLUE,     KC_LSFT,    DE_F,       DE_V,       DE_UDIA,    DE_ADIA,    DE_ODIA,                            DE_Y,            DE_Z,       KC_COMMA,   KC_DOT,     KC_K,       KC_RSFT,    CSTSETBLUE, 
-    CSTSETTOGGLE,   KC_LCTRL,   KC_LGUI,    KC_LALT,    KC_LEAD,    KC_BSPACE,  TD(tapdanceSpace), KC_DOWN,  TG(1), OSM(MOD_LSFT),   OSL(2),     KC_LEAD,    KC_RALT,    KC_RGUI,    KC_RCTRL,   CSTSETTOGGLE),
+    CSTSETTOGGLE,   KC_LCTRL,   KC_LGUI,    KC_LALT,    KC_LEAD,    KC_BSPACE,  TD(tapdanceSpace), KC_ENT,  TG(1), OSM(MOD_LSFT),    TG(2),     KC_LEAD,    KC_RALT,    KC_RGUI,    KC_RCTRL,   CSTSETTOGGLE),
 
     [1] = LAYOUT(
     TO(0),      _______,     _______,       _______,    _______,  _______,                                                           _______,    _______,    _______,       _______,     _______,     _______,
     _______,    _______,     KC_COMMA,      KC_7,       KC_8,     KC_9,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
     _______,    _______,     KC_DOT,        KC_4,       KC_5,     KC_6,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
     _______,    _______,     KC_0,          KC_1,       KC_2,     KC_3,       _______,                                    _______,   _______,    _______,    _______,       _______,     _______,     _______,    
-    _______,    _______,     _______,       _______,    _______,  _______,    _______,    _______,            _______,    _______,   _______,    _______,    _______,       _______,     _______,     _______
+    _______,    _______,     _______,       _______,    _______,  KC_BSPACE,  TD(tapdanceSpace),    KC_ENT,               _______,    TG(0),   _______,    _______,    _______,       _______,     _______,     _______
 ), 
 // special signs layer
 [2] = LAYOUT(
@@ -306,7 +352,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,     DE_AT,         DE_UNDS,    DE_LBRC,  DE_RBRC,    _______,                                     DE_EXLM,        DE_LABK,      DE_RABK,     DE_EQL,    DE_AMPR,    _______,    _______,    
     _______,    _______,     DE_BSLS,       DE_SLSH,    DE_LCBR,  DE_RCBR,    DE_ASTR,                                    DE_QUES,        DE_LPRN,      DE_RPRN,     DE_MINS,   DE_COLN,    _______,    _______,    
     _______,    _______,     DE_HASH,       DE_DLR,     DE_PIPE,  DE_TILD,    _______,                                   DE_PLUS,        DE_PERC,      DE_DQUO,     DE_QUOT,   DE_SCLN,    _______,    _______,    
-    _______,    _______,     _______,       _______,    _______,  KC_DEL,     _______,    _______,            _______,    _______,        _______,      _______,     _______,   _______,    _______,    _______
+    _______,    _______,     _______,       _______,    _______,  KC_BSPACE,  TD(tapdanceSpace),    KC_ENT,            _______,    TG(0),        _______,      _______,     _______,   _______,    _______,    _______
 ),
 
 

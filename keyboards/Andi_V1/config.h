@@ -90,6 +90,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define RGBLIGHT_EFFECT_RGB_TEST
 //#define RGBLIGHT_EFFECT_ALTERNATING
 #define ENABLE_RGB_MATRIX_BREATHING
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 
 
